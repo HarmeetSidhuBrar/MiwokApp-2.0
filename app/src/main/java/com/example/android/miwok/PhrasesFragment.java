@@ -1,4 +1,19 @@
-package com.sidhutechpvtltd.www.miwokapp;
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.example.android.miwok;
 
 
 import android.content.Context;
@@ -11,14 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * {@link Fragment} that displays a list of phrases.
  */
-public class FaimlyFragment extends Fragment {
+public class PhrasesFragment extends Fragment {
 
     /** Handles playback of all the sound files */
     private MediaPlayer mMediaPlayer;
@@ -67,7 +81,7 @@ public class FaimlyFragment extends Fragment {
         }
     };
 
-    public FaimlyFragment() {
+    public PhrasesFragment() {
         // Required empty public constructor
     }
 
@@ -81,27 +95,30 @@ public class FaimlyFragment extends Fragment {
 
         // Create a list of words
         final ArrayList<Word> words = new ArrayList<Word>();
-        words.add(new Word("father", "әpә", R.drawable.family_father, R.raw.family_father));
-        words.add(new Word("mother", "әṭa", R.drawable.family_mother, R.raw.family_mother));
-        words.add(new Word("son", "angsi", R.drawable.family_son, R.raw.family_son));
-        words.add(new Word("daughter", "tune", R.drawable.family_daughter, R.raw.family_daughter));
-        words.add(new Word("older brother", "taachi", R.drawable.family_older_brother,
-                R.raw.family_older_brother));
-        words.add(new Word("younger brother", "chalitti", R.drawable.family_younger_brother,
-                R.raw.family_younger_brother));
-        words.add(new Word("older sister", "teṭe", R.drawable.family_older_sister,
-                R.raw.family_older_sister));
-        words.add(new Word("younger sister", "kolliti", R.drawable.family_younger_sister,
-                R.raw.family_younger_sister));
-        words.add(new Word("grandmother ", "ama", R.drawable.family_grandmother,
-                R.raw.family_grandmother));
-        words.add(new Word("grandfather", "paapa", R.drawable.family_grandfather,
-                R.raw.family_grandfather));
-
+        words.add(new Word(R.string.phrase_where_are_you_going,
+                R.string.miwok_phrase_where_are_you_going, R.raw.phrase_where_are_you_going));
+        words.add(new Word(R.string.phrase_what_is_your_name,
+                R.string.miwok_phrase_what_is_your_name, R.raw.phrase_what_is_your_name));
+        words.add(new Word(R.string.phrase_my_name_is,
+                R.string.miwok_phrase_my_name_is, R.raw.phrase_my_name_is));
+        words.add(new Word(R.string.phrase_how_are_you_feeling,
+                R.string.miwok_phrase_how_are_you_feeling, R.raw.phrase_how_are_you_feeling));
+        words.add(new Word(R.string.phrase_im_feeling_good,
+                R.string.miwok_phrase_im_feeling_good, R.raw.phrase_im_feeling_good));
+        words.add(new Word(R.string.phrase_are_you_coming,
+                R.string.miwok_phrase_are_you_coming, R.raw.phrase_are_you_coming));
+        words.add(new Word(R.string.phrase_yes_im_coming,
+                R.string.miwok_phrase_yes_im_coming, R.raw.phrase_yes_im_coming));
+        words.add(new Word(R.string.phrase_im_coming,
+                R.string.miwok_phrase_im_coming, R.raw.phrase_im_coming));
+        words.add(new Word(R.string.phrase_lets_go,
+                R.string.miwok_phrase_lets_go, R.raw.phrase_lets_go));
+        words.add(new Word(R.string.phrase_come_here,
+                R.string.miwok_phrase_come_here, R.raw.phrase_come_here));
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_family);
+        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_phrases);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -134,7 +151,7 @@ public class FaimlyFragment extends Fragment {
 
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
                     // with the current word
-                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getAudioResourceId());
 
                     // Start the audio file
                     mMediaPlayer.start();

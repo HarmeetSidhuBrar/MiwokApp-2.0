@@ -1,4 +1,19 @@
-package com.sidhutechpvtltd.www.miwokapp;
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.example.android.miwok;
 
 
 import android.content.Context;
@@ -11,14 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * {@link Fragment} that displays a list of color vocabulary words.
  */
-public class FaimlyFragment extends Fragment {
+public class ColorsFragment extends Fragment {
 
     /** Handles playback of all the sound files */
     private MediaPlayer mMediaPlayer;
@@ -67,7 +81,7 @@ public class FaimlyFragment extends Fragment {
         }
     };
 
-    public FaimlyFragment() {
+    public ColorsFragment() {
         // Required empty public constructor
     }
 
@@ -81,27 +95,26 @@ public class FaimlyFragment extends Fragment {
 
         // Create a list of words
         final ArrayList<Word> words = new ArrayList<Word>();
-        words.add(new Word("father", "әpә", R.drawable.family_father, R.raw.family_father));
-        words.add(new Word("mother", "әṭa", R.drawable.family_mother, R.raw.family_mother));
-        words.add(new Word("son", "angsi", R.drawable.family_son, R.raw.family_son));
-        words.add(new Word("daughter", "tune", R.drawable.family_daughter, R.raw.family_daughter));
-        words.add(new Word("older brother", "taachi", R.drawable.family_older_brother,
-                R.raw.family_older_brother));
-        words.add(new Word("younger brother", "chalitti", R.drawable.family_younger_brother,
-                R.raw.family_younger_brother));
-        words.add(new Word("older sister", "teṭe", R.drawable.family_older_sister,
-                R.raw.family_older_sister));
-        words.add(new Word("younger sister", "kolliti", R.drawable.family_younger_sister,
-                R.raw.family_younger_sister));
-        words.add(new Word("grandmother ", "ama", R.drawable.family_grandmother,
-                R.raw.family_grandmother));
-        words.add(new Word("grandfather", "paapa", R.drawable.family_grandfather,
-                R.raw.family_grandfather));
-
+        words.add(new Word(R.string.color_red, R.string.miwok_color_red,
+                R.drawable.color_red, R.raw.color_red));
+        words.add(new Word(R.string.color_mustard_yellow, R.string.miwok_color_mustard_yellow,
+                R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow));
+        words.add(new Word(R.string.color_dusty_yellow, R.string.miwok_color_dusty_yellow,
+                R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
+        words.add(new Word(R.string.color_green, R.string.miwok_color_green,
+                R.drawable.color_green, R.raw.color_green));
+        words.add(new Word(R.string.color_brown, R.string.miwok_color_brown,
+                R.drawable.color_brown, R.raw.color_brown));
+        words.add(new Word(R.string.color_gray, R.string.miwok_color_gray,
+                R.drawable.color_gray, R.raw.color_gray));
+        words.add(new Word(R.string.color_black, R.string.miwok_color_black,
+                R.drawable.color_black, R.raw.color_black));
+        words.add(new Word(R.string.color_white, R.string.miwok_color_white,
+                R.drawable.color_white, R.raw.color_white));
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_family);
+        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_colors);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -134,7 +147,7 @@ public class FaimlyFragment extends Fragment {
 
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
                     // with the current word
-                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getAudioResourceId());
 
                     // Start the audio file
                     mMediaPlayer.start();

@@ -19,23 +19,12 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class ColorsFragment extends Fragment {
+
     /** Handles playback of all the sound files */
     private MediaPlayer mMediaPlayer;
 
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
-
-    /**
-     * This listener gets triggered when the {@link MediaPlayer} has completed
-     * playing the audio file.
-     */
-    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mediaPlayer) {
-            // Now that the sound file has finished playing, release the media player resources.
-            releaseMediaPlayer();
-        }
-    };
 
     /**
      * This listener gets triggered whenever the audio focus changes
@@ -66,6 +55,17 @@ public class ColorsFragment extends Fragment {
         }
     };
 
+    /**
+     * This listener gets triggered when the {@link MediaPlayer} has completed
+     * playing the audio file.
+     */
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            // Now that the sound file has finished playing, release the media player resources.
+            releaseMediaPlayer();
+        }
+    };
 
     public ColorsFragment() {
         // Required empty public constructor
@@ -75,8 +75,6 @@ public class ColorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.word_list, container, false);
-
-        /** TODO: Insert all the code from the NumberActivity’s onCreate() method after the setContentView method call */
 
         // Create and setup the {@link AudioManager} to request audio focus
         mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
@@ -94,6 +92,7 @@ public class ColorsFragment extends Fragment {
         words.add(new Word("black", "kululli", R.drawable.color_black, R.raw.color_black));
         words.add(new Word("white", "kelelli", R.drawable.color_white, R.raw.color_white));
 
+
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
         WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_colors);
@@ -101,7 +100,7 @@ public class ColorsFragment extends Fragment {
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
-        ListView listView = (ListView) getActivity().findViewById(R.id.list);
+        ListView listView = (ListView) rootView.findViewById(R.id.list);
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
@@ -140,13 +139,14 @@ public class ColorsFragment extends Fragment {
                 }
             }
         });
+
         return rootView;
     }
-
 
     @Override
     public void onStop() {
         super.onStop();
+
         // When the activity is stopped, release the media player resources because we won't
         // be playing any more sounds.
         releaseMediaPlayer();
@@ -172,5 +172,5 @@ public class ColorsFragment extends Fragment {
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
-
 }
+
